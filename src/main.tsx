@@ -265,8 +265,13 @@ function Modal({ title, onClose, children, className = '' }: { title: string; on
   useEffect(() => {
     previousFocus.current = document.activeElement as HTMLElement
     const bodyOverflow = document.body.style.overflow
+    const bodyPaddingRight = document.body.style.paddingRight
+    const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth
+    if (scrollbarWidth > 0) {
+      document.body.style.paddingRight = `calc(${getComputedStyle(document.body).paddingRight} + ${scrollbarWidth}px)`
+    }
     document.body.style.overflow = 'hidden'
-    dialogRef.current?.focus()
+    dialogRef.current?.focus({ preventScroll: true })
 
     const onKeyDown = (event: globalThis.KeyboardEvent) => {
       if (event.key === 'Escape') {
@@ -319,6 +324,7 @@ function Modal({ title, onClose, children, className = '' }: { title: string; on
     return () => {
       document.removeEventListener('keydown', onKeyDown)
       document.body.style.overflow = bodyOverflow
+      document.body.style.paddingRight = bodyPaddingRight
       previousFocus.current?.focus()
     }
   }, [onClose])

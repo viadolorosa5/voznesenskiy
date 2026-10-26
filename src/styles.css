@@ -307,6 +307,15 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
   overflow: hidden;
   background: rgba(36, 31, 28, .52);
   backdrop-filter: blur(3px);
+  animation: modal-backdrop-enter .24s ease-out both;
+}
+@keyframes modal-backdrop-enter {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes booking-modal-enter {
+  from { opacity: 0; transform: translateY(16px) scale(.975); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
 }
 .modal {
   position: relative;
@@ -362,7 +371,7 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
 .modal-title { margin: 0 38px 32px; color: #777; text-align: center; font: 400 36px/1.2 'Montserrat', Arial, sans-serif; }
 .booking-form { display: grid; gap: 23px; }
 .booking-form > label, .date-fields > label, .field { position: relative; display: grid; gap: 10px; color: #777; font-size: 23px; font-weight: 400; }
-.booking-modal { width: min(100%, 640px); }
+.booking-modal { width: min(100%, 640px); animation: booking-modal-enter .32s cubic-bezier(.2, .75, .25, 1) both; }
 .booking-modal .modal-content { padding: 40px 48px 34px; }
 .booking-modal .modal-title { width: 100%; margin: 0 0 24px; padding: 0 42px; text-align: center; font-size: 30px; }
 .booking-modal .booking-form { gap: 16px; }
